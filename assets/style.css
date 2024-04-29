@@ -148,13 +148,14 @@ main .voter-concours button {
 main .rating-area {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 40px;
     margin-top: 30px;
 }
 main .rating-area span {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
 }
 main .rating-area span h2 {
     color: white;
@@ -173,8 +174,21 @@ main .rating-area span h2 {
     padding: 0.0625rem;
 }
 .fa-star.gold {
-    color: #98c54f;
+    color: #e8d71d;
 }
+main .send-rating {
+    background-color: red;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+}
+main .send-rating button {
+    width: 100%;
+    padding: 10px 5px;
+    font-size: 120%;
+}
+
 
 .chart {
     color: cyan;

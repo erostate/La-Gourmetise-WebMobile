@@ -108,10 +108,10 @@ function validBakeryCode() {
     });
 }
 
+// Add a bakery rating in the rating page
 function putNote(type, level) {
-    // TODO: Faire la prise en charge du type
     for (let y = 1; y <= 5; y++) {
-        idElem = 'star-'+y;
+        idElem = 'star-'+type+'-'+y;
         const starElem = document.getElementById(idElem);
 
         if (y <= level) {
@@ -119,8 +119,13 @@ function putNote(type, level) {
         } else {
             starElem.classList.remove('gold');
         }
-        document.getElementById('note').value = level;
     }
+    document.getElementById(type+'Note').value = level;
+}
+
+// Send the bakery rating
+function sendBakeryRating() {
+
 }
 
 
