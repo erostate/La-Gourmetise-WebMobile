@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="shortcut icon" href="assets/image/logo.png" type="image/x-icon">
+</head>
+<body>
+    <div id="containerQuaso"></div>
+    <header>
+        <div>
+            <img src="assets/image/logo.png" alt="Logo">
+            <h1 class="company-name">LA GOURMETISE</h1>
+            <!-- <p onclick="yeetQuaso()" title="Click me">LE concours pour vous démarquer.</p> -->
+        </div>
+        <div id="dspBtnMenu">
+            <!-- <button>Règlement</button> -->
+        </div>
+    </header>
+
+    <main>
+        <section class="preview-concours">
+            <h1>La meilleure boulangerie</h1>
+        </section>
+        
+        <section class="voter-concours">
+            <h1>Vous souhaitez voter pour une boulangerie ?</h1>
+            <p>Entrez le code indiqué sur votre ticket de caisse</p>
+            <br><br>
+            <div class="container-code">
+                <input type="text" id="code1" placeholder="x" onkeyup="writeBakeryCode(event, this, 1);">
+                <input type="text" id="code2" placeholder="xxxx" maxlength="4" onkeyup="writeBakeryCode(event, this, 2);">
+                <input type="text" id="code3" placeholder="xxxx" maxlength="4" onkeyup="writeBakeryCode(event, this, 3);">
+                <input type="text" id="code4" placeholder="xxxx" maxlength="4" onkeyup="writeBakeryCode(event, this, 4);">
+                <input type="text" id="code5" placeholder="xxxx" maxlength="4" onkeyup="writeBakeryCode(event, this, 5);">
+            </div>
+            <p id="resultCode">x-xxxx-xxxx-xxxx-xxxx</p>
+            <br>
+            <button onclick="validBakeryCode()">Valider</button>
+        </section>
+    </main>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="assets/script.js"></script>
+</html>

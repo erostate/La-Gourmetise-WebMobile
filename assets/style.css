@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Bebas+Neue&family=Inter:wght@300&display=swap');
+/*
+font-family: 'Be Vietnam Pro', sans-serif;
+font-family: 'Bebas Neue', sans-serif;
+font-family: 'Inter', sans-serif;
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #323232;
+}
+
+:root {
+    --font-bebas: 'Bebas Neue', sans-serif;
+    --font-be-vietnam: 'Be Vietnam Pro', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+
+    --header-height: 80px;
+
+    --checkbox-color: lime;
+    --checkbox-color-disabled: #959495;
+}
+
+header {
+    width: 100%;
+    height: var(--header-height);
+    flex-shrink: 0;
+    border-bottom: 3px solid #707070;
+    background: #282828;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #FFF;
+    font-family: var(--font-bebas);
+}
+header div:nth-child(1) img {
+    height: calc(var(--header-height) - 24px);
+    margin-left: 12px;
+}
+header div:nth-child(1) h1 {
+    color: #FFF;
+    font-family: var(--font-bebas);
+    font-size: 200%;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 6px;
+}
+header div:nth-child(1) p {
+    color: #FFF;
+    font-family: var(--font-be-vietnam);
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+    margin: 20px 0 0 5px;
+}
+header div:nth-child(2) button {
+    cursor: pointer;
+    margin-right: 12px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    border: 3px solid #707070;
+    background: #323232;
+    color: #FFF;
+    text-align: center;
+    font-family: var(--font-inter);
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    transition: all 0.15s ease-in-out;
+}
+header div:nth-child(2) button:hover {
+    background: #242424;
+    transition: all 0.15s ease-in-out;
+}
+
+main {
+    position: fixed;
+    top: calc(var(--header-height) + 3px);
+    width: 100%;
+    height: calc(calc(100% - 3px) - var(--header-height));
+}
+main .preview-concours {
+    background-image: url('image/hero-banner.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 130px;
+    display: flex;
+    align-items: flex-end;
+}
+main .preview-concours h1 {
+    color: black;
+    margin: 0 5px;
+    font-family: var(--font-be-vietnam);
+    font-size: 170%;
+}
+main .voter-concours {
+    /* background-color: red; */
+    padding: 50px 5px;
+    color: white;
+    width: calc(100% - 10px);
+    height: calc(calc(100% - 130px) - 100px);
+}
+main .voter-concours h1 {
+    font-family: var(--font-be-vietnam);
+}
+main .voter-concours p {
+    font-family: var(--font-inter);
+}
+main .voter-concours div.container-code {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2px;
+    flex-wrap: wrap;
+}
+main .voter-concours div.container-code input {
+    width: 65px;
+    outline: none;
+    border-radius: 0.2rem;
+    font-size: 120%;
+    text-align: center;
+}
+main .voter-concours #resultCode {
+    text-align: center;
+}
+main .voter-concours button {
+    width: 100%;
+    padding: 2px 5px;
+    font-size: 120%;
+}
+
+main .rating-area {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 30px;
+}
+main .rating-area span {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+main .rating-area span h2 {
+    color: white;
+    font-family: var(--font-be-vietnam);
+    font-weight: normal;
+    margin-left: 5px;
+}
+.stars {
+    display: inline-flex;
+    justify-content: flex-start;
+    font-size: 3em;
+}
+.fa-star {
+    color: gray;
+    cursor: pointer;
+    padding: 0.0625rem;
+}
+.fa-star.gold {
+    color: #98c54f;
+}
+
+.chart {
+    color: cyan;
+}
+
+.loading-img {
+    width: 50px;
+    height: 50px;
+}
+
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #282828;
+    color: #FFF;
+    border: 3px solid #707070;
+    border-radius: 12px;
+    width: 50%;
+    margin: 10% auto;
+    padding: 20px;
+    font-family: var(--font-inter);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.modal-header .close {
+    font-size: 150%;
+    font-weight: bold;
+    padding: 5px 8px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+.modal-header .close:hover {
+    background-color: rgb(233, 51, 51);
+}
+.modal-body {
+    width: 100%;
+}
+.modal-body .api-key-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.modal-body .api-key-content #apiKeyInput {
+    width: 100%;
+    padding: 5px;
+    font-size: 120%;
+    background: #323232;
+    border: 3px solid #707070;
+    color: white;
+    border-right: none;
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+}
+.modal-body .api-key-content #apiKeyInput.success {
+    border-color: #2dc751;
+}
+.modal-body .api-key-content button {
+    cursor: pointer;
+    width: 100px;
+    padding: 5px;
+    font-size: 120%;
+    background: #117bfd;
+    color: white;
+    border: solid 3px #117bfd;
+    outline: none;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    transition: all 0.15s ease-in-out;
+}
+.modal-body .api-key-content button:hover {
+    background: #0a5cbf;
+    border-color: #0a5cbf;
+    transition: all 0.15s ease-in-out;
+}
+.modal-body .api-key-content button.success {
+    background: #2dc751;
+    border-color: #2dc751;
+    transition: all 0.15s ease-in-out;
+}
+.modal-body .btn-regenerate {
+    cursor: pointer;
+    width: 100%;
+    padding: 5px;
+    font-size: 120%;
+    background: #e45d2b;
+    color: white;
+    border: solid 3px #e45d2b;
+    outline: none;
+    border-radius: 0.3rem;
+    transition: all 0.15s ease-in-out;
+}
+.modal-body .btn-regenerate:hover {
+    background: #c24a1f;
+    border-color: #c24a1f;
+    transition: all 0.15s ease-in-out;
+}
