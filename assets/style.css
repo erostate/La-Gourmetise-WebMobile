@@ -188,6 +188,26 @@ main .send-rating button {
     padding: 10px 5px;
     font-size: 120%;
 }
+main .display-error {
+    width: 100%;
+    color: rgb(255, 44, 44);
+    font-family: var(--font-inter);
+    font-weight: bold;
+    font-style: italic;
+    font-size: 120%;
+    text-align: center;
+    margin-top: 30px;
+}
+main .display-success {
+    width: 100%;
+    color: rgb(44, 255, 44);
+    font-family: var(--font-inter);
+    font-weight: bold;
+    font-style: italic;
+    font-size: 120%;
+    text-align: center;
+    margin-top: 30px;
+}
 
 
 .chart {

@@ -76,11 +76,19 @@ function verifSimilarCode() {
 }
 
 // Valid the bakery code
-function validBakeryCode() {
+function validBakeryCode(btn) {
+    const dpError = document.getElementById('dpError');
+
+    btn.disabled = true;
+    btn.innerText = "Chargement...";
+
     const resultCode = document.getElementById('resultCode').innerText;
     
     verif = verifSimilarCode();
     if (verif === false) {
+        btn.disabled = false;
+        btn.innerText = "Valider";
+        dpError.innerText = "Le code entré n'est pas valide";
         return;
     }
 
@@ -98,10 +106,21 @@ function validBakeryCode() {
         success: function(result, status, xhr) {
             if (result.result == "code-access-valid") {
                 window.location.href="rating.html?code="+resultCode+"&id="+result.candidate;
+            } else if (result.result == "code-not-gived") {
+                dpError.innerText = "Le code entré n'est pas disponible";
+            } else if (result.result == "code-already-used") {
+                dpError.innerText = "Ce code a déjà été utilisé";
+            } else {
+                dpError.innerText = "Le code entré n'est pas valide";
             }
+            btn.disabled = false;
+            btn.innerText = "Valider";
             return;
         },
         error: function(xhr, error) {
+            btn.disabled = false;
+            btn.innerText = "Valider";
+            dpError.innerText = "Le code entré n'est pas valide";
             console.log(error);
             console.log(xhr);
         }
@@ -125,8 +144,83 @@ function putNote(type, level) {
 
 // Send the bakery rating
 function sendBakeryRating() {
+    const code = getParamUri().code;
+    const candidate = getParamUri().id;
 
+    if (candidate !== candidate.substring(0, 1)) {
+        console.log("Error: candidateURi is not valid");
+        return;
+    }
+
+    const companyNote = document.getElementById('companyNote').value;
+    const productNote = document.getElementById('productNote').value;
+    const priceNote = document.getElementById('priceNote').value;
+    const staffNote = document.getElementById('staffNote').value;
+
+    const data = `
+        {
+            "companyRating": `+companyNote+`,
+            "productRating": `+productNote+`,
+            "priceRating": `+priceNote+`,
+            "staffRating": `+staffNote+`
+        }
+    `;
+    apiUrl = getApiUrl();
+    $.ajax({
+        type: 'POST',
+        dataType:"json",
+        url: apiUrl+'/api/ratings?code='+code,
+        headers:{
+            'accept' : 'application/ld+json',
+            'Content-Type' : 'application/ld+json'
+        },
+        data: data,
+        success: function(result, status, xhr) {
+            if (result.result == "code-already-used") {
+                window.location.href="index.html?rating=code-already-used";
+            } else if (result.result == "rating-not-posted") {
+                console.log("Error: rating not posted");
+                return;
+            } else if (result.result == "code-not-gived") {
+                window.location.href="index.html?rating=code-not-gived";
+            } else if (result.result == "rating-posted") {
+                window.location.href="index.html?rating=posted";
+            }
+        },
+        error: function(xhr, error) {
+            console.log(error);
+            console.log(xhr);
+        }
+    });
 }
+
+// Check the status of the rating
+function checkRatingStatus() {
+    const dpError = document.getElementById('dpError');
+    const dpSuccess = document.getElementById('dpSuccess');
+
+    const rating = getParamUri().rating;
+    if (rating == undefined) {
+        return false;
+    }
+
+    if (rating == "posted") {
+        dpSuccess.innerText = "Votre avis a bien été enregistré";
+    }
+    return true;
+}
+
+
+// ONLOAD
+window.onload = function() {
+    const ratingStatus = checkRatingStatus();
+    if (ratingStatus === true) {
+        setTimeout(function() {
+            window.location.href="index.html";
+        }, 3000);
+    }
+}
+
 
 
 // COOKIE
